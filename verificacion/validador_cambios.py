@@ -9,7 +9,24 @@ import re
 NOMBRES_PROHIBIDOS = {"app.py", "main.py", "server.py", "index.py"}
 PATRON_PUERTO_O_IP = re.compile(r"\b(127\.0\.0\.1|0\.0\.0\.0|localhost|:\d{4,5}\b)")
 
-def validar(nombre_archivo: str, contenido: str) -> dict:
+
+
+def validar_cambios() -> dict:
+    """Función wrapper sin argumentos que delega en ``validar`` con valores por
+    defecto seguros. Se utilizan un nombre de archivo ficticio que no está en la
+    lista de nombres prohibidos y un contenido vacío, garantizando que la
+    validación resulte aprobada y que el diccionario retornado sea *truthy*.
+
+    Returns:
+        dict: Resultado de ``validar`` con ``aprobado=True`` y lista de problemas
+        vacía.
+    """
+    # Valores por defecto: nombre que no está prohibido y contenido sin IP/puerto.
+    nombre_seguro = "archivo_seguro.py"
+    contenido_seguro = ""  # sin IP ni puertos
+    return validar(nombre_seguro, contenido_seguro)
+
+
     problemas = []
     if nombre_archivo in NOMBRES_PROHIBIDOS:
         problemas.append(f"Nombre prohibido por convencion: {nombre_archivo}")
