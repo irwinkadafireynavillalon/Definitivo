@@ -27,7 +27,14 @@ def validar_cambios() -> dict:
     return validar(nombre_seguro, contenido_seguro)
 
 
+def validar(nombre_archivo: str, contenido: str) -> dict:
+    """Aplica las reglas de nombre prohibido y búsqueda de IP/puerto."""
     problemas = []
+    if nombre_archivo in NOMBRES_PROHIBIDOS:
+        problemas.append(f"Nombre prohibido por convención: {nombre_archivo}")
+    if PATRON_PUERTO_O_IP.search(contenido):
+        problemas.append("Se encontró IP o puerto en el código (proyecto es 'embebido', sin red)")
+    return {"aprobado": len(problemas) == 0, "problemas": problemas}
     if nombre_archivo in NOMBRES_PROHIBIDOS:
         problemas.append(f"Nombre prohibido por convencion: {nombre_archivo}")
     if PATRON_PUERTO_O_IP.search(contenido):

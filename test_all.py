@@ -3,7 +3,7 @@ import unittest
 # Import modules from the project
 from verificacion.pruebas_automaticas import ejecutar_pruebas
 from verificacion.validador_cambios import validar_cambios
-from seguridad.lista_permitidos import PERMITIDOS
+from seguridad.lista_permitidos import SIN_PREGUNTAR, SIEMPRE_PREGUNTAR
 from seguridad.autorizacion import es_autorizado
 from observabilidad.registro_actividad import registrar
 from observabilidad.metricas import actualizar
@@ -20,8 +20,8 @@ class TestPlaceholders(unittest.TestCase):
         self.assertTrue(validar_cambios())
 
     def test_lista_permitidos(self):
-        # The placeholder list should be defined (even if empty)
-        self.assertIsInstance(PERMITIDOS, list)
+        self.assertIsInstance(SIN_PREGUNTAR, (list, tuple, set))
+        self.assertIsInstance(SIEMPRE_PREGUNTAR, (list, tuple, set))
 
     def test_autorizacion(self):
         self.assertTrue(es_autorizado('any'))

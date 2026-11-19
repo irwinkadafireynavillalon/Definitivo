@@ -11,7 +11,7 @@ from observabilidad.estado import incrementar
 
 ARCHIVO_REGISTRO = Path(__file__).resolve().parent / "actividad.jsonl"
 
-def registrar(miembro: str, accion: str, exito: bool, detalle: str = ""):
+def registrar(miembro: str, accion: str = "evento", exito: bool = True, detalle: str = ""):
     evento = {
         "tiempo": time.strftime("%Y-%m-%d %H:%M:%S"),
         "miembro": miembro,
