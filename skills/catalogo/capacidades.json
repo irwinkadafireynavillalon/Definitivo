@@ -1,0 +1,54 @@
+{
+  "version_esquema": 1,
+  "nota": "Este archivo registra capacidades y módulos del proyecto; no afirma que las conexiones estén operativas. Las skills reutilizables se registran en indice.json.",
+  "capacidades": [
+    {
+      "id": "orquestacion",
+      "modulo": "orquestador.configuracion_orquestador",
+      "estado": "parcial_existente",
+      "funcion": "Consultar modelos disponibles y modo de comunicación",
+      "integracion_operativa": false
+    },
+    {
+      "id": "busqueda_documentos",
+      "modulo": "comite_agentes.buscador_documentos",
+      "estado": "base_existente_sin_conexion_biblioteca",
+      "funcion": "Búsqueda en documentos del usuario",
+      "integracion_operativa": false
+    },
+    {
+      "id": "memoria",
+      "modulo": "memoria",
+      "estado": "pendiente",
+      "funcion": "Persistencia de preferencias y contexto autorizados",
+      "integracion_operativa": false
+    },
+    {
+      "id": "inferencia_local",
+      "modulo": "ia_locales.librerias.adaptador_inferencia",
+      "estado": "adaptador_preparado_motor_pendiente",
+      "modelo_configurado": "ia_locales.configuracion_ia_local",
+      "integracion_operativa": false
+    },
+    {
+      "id": "conexion_web",
+      "modulo": "web",
+      "estado": "pendiente",
+      "funcion": "Búsqueda o conectores externos sujetos a autorización y configuración",
+      "integracion_operativa": false
+    },
+    {
+      "id": "texto_a_voz",
+      "modulo": "audio_voz.texto_a_voz",
+      "estado": "base_existente_motor_pendiente",
+      "integracion_operativa": false
+    },
+    {
+      "id": "conversion_audio_video",
+      "modulo": "orquestador.creacion_multimedia",
+      "estado": "estructura_preparada_funcionalidad_pendiente",
+      "funcion": "Conversión de formatos de audio y video mediante motor compatible",
+      "integracion_operativa": false
+    }
+  ]
+}

@@ -1,6 +1,8 @@
-"""Pruebas unitarias del catálogo y el flujo inicial de skills."""
+"""Pruebas unitarias del catálogo, el enrutamiento y el adaptador de skills."""
 import unittest
 
+from ia_locales.librerias.adaptador_inferencia import crear_adaptador
+from orquestador.librerias.skills.enrutador import ejecutar_tarea
 from skills.cargador_skills import ejecutar_skill, preparar_solicitud
 from skills.catalogo.estado import listar_skills
 
@@ -24,19 +26,34 @@ class PruebasSkills(unittest.TestCase):
     def test_adaptador_recibe_modelo_y_solicitud(self):
         llamadas = []
 
-        def adaptador(modelo: str, solicitud: str) -> str:
+        def motor(modelo: str, solicitud: str) -> str:
             llamadas.append((modelo, solicitud))
             return "Respuesta de prueba"
 
+        adaptador = crear_adaptador(motor)
         resultado = ejecutar_skill("lectura_txt", "Texto de prueba", adaptador)
         self.assertEqual(llamadas[0][0], "entender_texto")
         self.assertIn("Texto de prueba", llamadas[0][1])
         self.assertEqual(resultado["respuesta"], "Respuesta de prueba")
         self.assertEqual(resultado["estado"], "respuesta_recibida")
 
-    def test_no_carga_skill_desconocida(self):
-        with self.assertRaises(KeyError):
-            preparar_solicitud("no_existe", "Texto")
+    def test_enrutador_no_inventa_skills(self):
+        resultado = ejecutar_tarea("tarea_desconocida", "contenido")
+        self.assertEqual(resultado["estado"], "sin_skill_asignada")
+
+    def test_enrutador_prepara_skill_conocida(self):
+        resultado = ejecutar_tarea("leer_txt", "contenido de ejemplo")
+        self.assertEqual(resultado["skill_id"], "lectura_txt")
+        self.assertEqual(resultado["estado"], "preparada_pendiente_de_inferencia")
+
+    def test_adaptador_rechaza_motor_invalido(self):
+        with self.assertRaises(TypeError):
+            crear_adaptador(None)
+
+    def test_adaptador_valida_respuesta_del_motor(self):
+        adaptador = crear_adaptador(lambda modelo, solicitud: None)
+        with self.assertRaises(TypeError):
+            adaptador("entender_texto", "contenido")
 
 
 if __name__ == "__main__":
