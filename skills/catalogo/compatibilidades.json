@@ -1,0 +1,16 @@
+{
+  "version_esquema": 1,
+  "compatibilidades": [
+    {
+      "skill_id": "lectura_txt",
+      "modulo_responsable": "comite_agentes.buscador_documentos",
+      "modelo_local": "entender_texto",
+      "adaptador_inferencia": "pendiente_conector_inferencia",
+      "estado_conexion": "pendiente",
+      "entrada": "texto proporcionado explícitamente al cargador",
+      "salida": "respuesta de la función de inferencia conectada",
+      "requiere_red": false,
+      "requiere_instalacion": false
+    }
+  ]
+}

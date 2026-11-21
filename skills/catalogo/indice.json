@@ -1,0 +1,14 @@
+{
+  "version_esquema": 1,
+  "skills": [
+    {
+      "id": "lectura_txt",
+      "nombre": "Preparar texto para lectura y comprensión",
+      "categoria": "documentos",
+      "estado": "activa_preparada",
+      "archivo": "activas/documentos/lectura_txt/SKILL.md",
+      "compatibilidad_id": "lectura_txt",
+      "descripcion": "Prepara texto proporcionado por el usuario para procesarlo mediante una función de inferencia compatible."
+    }
+  ]
+}
